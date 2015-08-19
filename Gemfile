@@ -17,6 +17,8 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'figaro'
 
+gem 'phony_rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -26,6 +28,13 @@ gem 'figaro'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
+  gem 'capybara'
   gem 'spring'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
 end
 
+group :test do
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
+end
