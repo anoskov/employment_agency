@@ -42,6 +42,11 @@ class Employee < ActiveRecord::Base
     self.name.split(' ')[2].capitalize
   end
 
+
+  def skills_attributes=(skills)
+    self.skills << skills.map { |attrs| Skill.where(attrs).first_or_initialize(attrs)  } - self.skills
+  end
+
   private
 
   def set_name!

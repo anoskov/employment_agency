@@ -26,6 +26,10 @@ class Vacancy < ActiveRecord::Base
     # поэтому отнимаем ее перед добавлением.
   before_create { self.salary = (self.salary.begin..self.salary.end - 1) }
 
+  def skills_attributes=(skills)
+    self.skills << skills.map { |attrs| Skill.where(attrs).first_or_initialize(attrs)  } - self.skills
+  end
+
   def created_date
     self.created_at.strftime('%Y-%m-%d')
   end
