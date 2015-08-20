@@ -51,6 +51,18 @@ RSpec.describe Employee, :type => :model do
         expect(Skill.first).to eq @employee.skills.first
       end
 
+      it 'have many ideal vacancies' do
+        expect(@employee).to have_many(:ideal_vacancies).through(:total_matches)
+        @vacancy = create(:vacancy, skills: [*Skill.all])
+        expect(@employee.ideal_vacancies.first).to eq @vacancy
+      end
+
+      it 'have many potential vacancies' do
+        expect(@employee).to have_many(:potential_vacancies).through(:partial_matches)
+        @vacancy = create(:vacancy, skills: [*Skill.all, create(:skill, :title => 'Python')])
+        expect(@employee.potential_vacancies.first).to eq @vacancy
+      end
+
     end
 
   end

@@ -37,6 +37,18 @@ RSpec.describe Vacancy, :type => :model do
         expect(Skill.first).to eq @vacancy.skills.first
       end
 
+      it 'have many ideal candidates' do
+        expect(@vacancy).to have_many(:ideal_candidates).through(:total_matches)
+        @employee = create(:employee, :skills => [*Skill.all])
+        expect(@vacancy.ideal_candidates.first).to eq @employee
+      end
+
+      it 'have many potential candidates' do
+        expect(@vacancy).to have_many(:ideal_candidates).through(:total_matches)
+        @employee = create(:employee, :skills => [Skill.first, Skill.last])
+        expect(@vacancy.potential_candidates.first).to eq @employee
+      end
+
     end
 
   end
