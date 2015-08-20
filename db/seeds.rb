@@ -14,6 +14,15 @@ employee = Employee.create({
                     :desired_salary => 80000,
                     :skills => skills
                 })
+Employee.create({
+                    :fname => 'Иванов',
+                    :lname => 'Максим',
+                    :sname => 'Валерьевич',
+                    :contact_info => 'max.ivanov@gmail.com',
+                    :job_status => 'Ищу работу',
+                    :desired_salary => 60000,
+                    :skills => [Skill.first, Skill.last]
+                })
 vacancy = Vacancy.create({
                    :title => 'Senior/Ruby on Rails developer',
                    :expiration_date => Date.new(2015, 8, 30),

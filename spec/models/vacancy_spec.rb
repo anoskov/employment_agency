@@ -13,7 +13,7 @@ RSpec.describe Vacancy, :type => :model do
   end
 
   before :all do
-    @vacancy = create(:vacancy)
+    @vacancy = create(:vacancy, :with_all_skills)
   end
 
   context 'attributes' do

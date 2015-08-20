@@ -2,10 +2,24 @@ class Employee < ActiveRecord::Base
 
   JOB_STATUSES = ['Ищу работу', 'Не ищу работу', 'Открыт к предложениям']
 
+  scope :with_vacancies, -> (id) { includes(:ideal_vacancies, :potential_vacancies, :skills)
+                                       .references(:ideal_vacancies, :potential_vacancies, :skills)
+                                       .find(id) }
+
   attr_accessor :fname, :lname, :sname
 
   has_many :specified_skills, :as => :owner, :dependent => :delete_all
   has_many :skills, :through => :specified_skills
+
+  has_many :total_matches, -> { where(:pct_of_match => 100) },
+           :class_name => 'MatchesOfSkill'
+  has_many :ideal_vacancies, -> { order(:salary => :desc) },
+           :through => :total_matches, :class_name => 'Vacancy', :source => :vacancy
+
+  has_many :partial_matches, -> { where(:pct_of_match => 1..99) },
+           :class_name => 'MatchesOfSkill'
+  has_many :potential_vacancies, -> { order(:salary => :desc) },
+           :through => :partial_matches, :class_name => 'Vacancy', :source => :vacancy
 
   accepts_nested_attributes_for :skills, :allow_destroy => true
 

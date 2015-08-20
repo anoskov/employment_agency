@@ -12,7 +12,7 @@ RSpec.describe Employee, :type => :model do
   end
 
   before :all do
-    @employee = create(:employee)
+    @employee = create(:employee, :with_all_skills)
   end
 
   context 'attributes' do
