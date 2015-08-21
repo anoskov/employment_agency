@@ -1,6 +1,5 @@
 module Api
   module V1
-
     class VacanciesController < BaseController
 
       before_action :set_vacancy, :only => [:update, :destroy]
@@ -39,6 +38,5 @@ module Api
       end
 
     end
-
   end
 end

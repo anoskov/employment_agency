@@ -4,7 +4,8 @@ class Employee < ActiveRecord::Base
 
   scope :with_vacancies, -> (id) { includes(:ideal_vacancies, :potential_vacancies, :skills)
                                        .references(:ideal_vacancies, :potential_vacancies, :skills)
-                                       .find(id) }
+                                       .find(id)
+                                       }
 
   attr_accessor :fname, :lname, :sname
 
@@ -41,7 +42,6 @@ class Employee < ActiveRecord::Base
   def surname
     self.name.split(' ')[2].capitalize
   end
-
 
   def skills_attributes=(skills)
     self.skills << skills.map { |attrs| Skill.where(attrs).first_or_initialize(attrs)  } - self.skills

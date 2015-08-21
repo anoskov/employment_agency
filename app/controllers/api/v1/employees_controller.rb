@@ -1,6 +1,5 @@
 module Api
   module V1
-
     class EmployeesController < BaseController
 
       before_action :set_employee, :only => [:update, :destroy]
@@ -38,6 +37,5 @@ module Api
       end
 
     end
-
   end
 end
