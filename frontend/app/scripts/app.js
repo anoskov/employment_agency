@@ -10,7 +10,8 @@ angular
     'ngTouch',
     'restangular',
     'smart-table',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngTagsInput'
   ])
   .config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('/api/v1');

@@ -34,15 +34,19 @@ angular.module('employmentAgencyApp')
 
       modalInstance.result.then(function (vacancy) {
         vacancy.expiration_date = $filter('date')(vacancy.expiration_date, "yyyy-MM-dd");
+        vacancy.created_date = $filter('date')(new Date(), "yyyy-MM-dd");
+        vacancy.skills_attributes = vacancy.skills_attributes.concat(vacancy.new_skills);
+        vacancy.skills = vacancy.skills_attributes;
         baseVacancies.post(vacancy).then(function(response) {
-          var alert = response.data;
-          alert.type = "success";
-          $scope.alerts.push(alert);
+          var result = response.data;
+          vacancy.id = result.id;
+          result.type = "success";
+          $scope.alerts.push(result);
           $scope.allVacancies.push(vacancy);
         }, function(response) {
-          var alert = response.data.result;
-          alert.type = "danger";
-          $scope.alerts.push(alert);
+          var result = response.data.result;
+          result.type = "danger";
+          $scope.alerts.push(result);
         });
       });
     };
