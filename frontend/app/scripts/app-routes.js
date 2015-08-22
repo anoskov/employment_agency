@@ -13,10 +13,15 @@ angular.module('employmentAgencyApp')
         controller: 'VacanciesCtrl',
         controllerAs: 'vacancies'
       })
+      .when('/vacancies/:vacancyId', {
+        templateUrl: 'views/show_vacancy.html',
+        controller: 'ShowVacancyCtrl',
+        controllerAs: 'vacancy'
+      })
       .when('/vacancies/:vacancyId/edit', {
         templateUrl: 'views/edit_vacancy.html',
         controller: 'EditVacancyCtrl',
-        controllerAs: 'vacancy'
+        controllerAs: 'editVacancy'
       })
       .when('/employees', {
         templateUrl: 'views/employees.html',

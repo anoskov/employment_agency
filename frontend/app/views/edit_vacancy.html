@@ -4,7 +4,8 @@
     <p>{{field}} : {{error}}</p>
   </span>
 </alert>
-<form name="editVacancyForm" role="form" ng-submit="editVacancyForm.$valid && updateVacancy()">
+<form name="editVacancyForm" role="form" ng-submit="editVacancyForm.$valid && updateVacancy()"
+      ng-init="vacancy.skills_attributes = []">
   <div class="form-group">
     <label>Название</label>
     <input type="text" name="title" class="form-control" ng-model="vacancy.title" required>
@@ -23,7 +24,7 @@
   <div class="form-group">
     <label>Необходимые навыки</label>
     <p>Доступные навыки:</p>
-    <select  class="form-control" size="15" ng-model="vacancy.skills_attributes"
+    <select  class="form-control" size="15" ng-model="vacancy.selected_skills"
              ng-options="skill.title for skill in skills" multiple>
     </select>
   </div>

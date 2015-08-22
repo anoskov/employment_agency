@@ -24,7 +24,7 @@ angular.module('employmentAgencyApp')
     });
 
     $scope.updateVacancy = function () {
-      $scope.vacancy.skills_attributes.push($scope.vacancy.skills);
+      $scope.vacancy.skills_attributes = $scope.vacancy.skills.concat($scope.vacancy.selected_skills);
       $scope.vacancy.put().then(function(response){
         var result = response;
         result.type = "success";

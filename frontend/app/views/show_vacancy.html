@@ -1,0 +1,54 @@
+<h3>{{vacancy.title}}</h3>
+<hr>
+<p><ins><b>Необходимые умения:</b></ins></p>
+<ul>
+  <li ng-repeat="skill in vacancy.skills"><mark>{{skill.title}}</mark></li>
+</ul>
+<p><ins><b>Зарплата:</b></ins> {{vacancy.salary_begin}} - {{vacancy.salary_end}}</p>
+<p><ins><b>Актуально до:</b></ins> {{vacancy.expiration_date}}</p>
+<p><ins><b>Контактная информация:</b></ins> {{vacancy.contact_info}}</p>
+<br>
+
+<h4>Идеальные кандидаты</h4>
+<table st-table="vacancy.ideal_candidates" class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Имя</th>
+    <th>Навыки</th>
+    <th>Ожидаемая зарплата</th>
+    <th>Контактные данные</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="candidate in vacancy.ideal_candidates">
+    <td>{{candidate.name}}</td>
+    <td>
+      <p ng-repeat="skill in candidate.skills">{{skill.title}}</p>
+    </td>
+    <td>{{candidate.desired_salary}}</td>
+    <td>{{candidate.contact_info}}</td>
+  </tr>
+  </tbody>
+</table>
+<br>
+<h4>Потенциальные кандидаты</h4>
+<table st-table="vacancy.potential_candidates" class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Имя</th>
+    <th>Навыки</th>
+    <th>Ожидаемая зарплата</th>
+    <th>Контактные данные</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="candidate in vacancy.potential_candidates">
+    <td>{{candidate.name}}</td>
+    <td>
+      <p ng-repeat="skill in candidate.skills">{{skill.title}}</p>
+    </td>
+    <td>{{candidate.desired_salary}}</td>
+    <td>{{candidate.contact_info}}</td>
+  </tr>
+  </tbody>
+</table>

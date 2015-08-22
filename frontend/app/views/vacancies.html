@@ -18,6 +18,7 @@
     <th>Актуально до</th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
@@ -30,6 +31,7 @@
     <td>{{vacancy.contact_info}}</td>
     <td>{{vacancy.created_date}}</td>
     <td>{{vacancy.expiration_date}}</td>
+    <td><a type="button" class="btn btn-sm btn-info" ng-href="#/vacancies/{{vacancy.id}}">Просмотр</a></td>
     <td><a type="button" class="btn btn-sm btn-primary" ng-href="#/vacancies/{{vacancy.id}}/edit">Редактировать</a></td>
     <td><button type="button" class="btn btn-sm btn-danger" ng-click="deleteVacancy(vacancy.id, $index)">Удалить</button></td>
   </tr>
@@ -59,7 +61,7 @@
       <div class="form-group">
         <label>Необходимые навыки</label>
         <p>Доступные навыки:</p>
-        <select  class="form-control" size="15" ng-model="vacancy.skills_attributes"
+        <select  class="form-control" size="15" ng-model="vacancy.selected_skills"
                  ng-options="skill.title for skill in skills" multiple required>
         </select>
       </div>

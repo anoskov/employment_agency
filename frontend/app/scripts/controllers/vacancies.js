@@ -35,7 +35,7 @@ angular.module('employmentAgencyApp')
       modalInstance.result.then(function (vacancy) {
         vacancy.expiration_date = $filter('date')(vacancy.expiration_date, "yyyy-MM-dd");
         vacancy.created_date = $filter('date')(new Date(), "yyyy-MM-dd");
-        vacancy.skills_attributes = vacancy.skills_attributes.concat(vacancy.new_skills);
+        vacancy.skills_attributes = vacancy.new_skills.concat(vacancy.selected_skills);
         vacancy.skills = vacancy.skills_attributes;
         baseVacancies.post(vacancy).then(function(response) {
           var result = response;
