@@ -1,3 +1,4 @@
+json.id              vacancy.id
 json.title           vacancy.title
 json.salary_begin    vacancy.salary.begin
 json.salary_end      vacancy.salary.end
