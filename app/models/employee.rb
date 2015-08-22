@@ -44,7 +44,7 @@ class Employee < ActiveRecord::Base
   end
 
   def skills_attributes=(skills)
-    self.skills << skills.map { |attrs| Skill.where(attrs).first_or_initialize(attrs)  } - self.skills
+    self.skills = skills.map { |attrs| Skill.where(attrs).first_or_initialize(attrs)  }
   end
 
   private

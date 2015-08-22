@@ -1,0 +1,52 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <p>{{alert.msg}}</p>
+  <span ng-repeat="(field, error) in alert.errors">
+    <p>{{field}} : {{error}}</p>
+  </span>
+</alert>
+<form name="editVacancyForm" role="form" ng-submit="editVacancyForm.$valid && updateVacancy()">
+  <div class="form-group">
+    <label>Название</label>
+    <input type="text" name="title" class="form-control" ng-model="vacancy.title" required>
+  </div>
+  <div class="form-group">
+    <label>Зарплата</label>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <input type="text" class="form-control" ng-model="vacancy.salary_begin" placeholder="От" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" ng-model="vacancy.salary_end" placeholder="До" required>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Необходимые навыки</label>
+    <p>Доступные навыки:</p>
+    <select  class="form-control" size="15" ng-model="vacancy.skills_attributes"
+             ng-options="skill.title for skill in skills" multiple>
+    </select>
+  </div>
+  <div class="form-group">
+    <tags-input ng-model="vacancy.skills" min-length="1" display-property="title" placeholder="Добавить навык">
+    </tags-input>
+  </div>
+  <div class="form-group">
+    <label>Контактная информация</label>
+    <textarea ng-model="vacancy.contact_info" class="form-control" required></textarea>
+  </div>
+  <div class="form-group">
+    <label>Актуально до</label>
+    <p class="input-group">
+      <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd"
+             ng-model="vacancy.expiration_date" is-open="exp_date_opened" min-date="minDate" max-date="'2020-06-22'"
+             datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click = "open($event); exp_date_opened = ! exp_date_opened">
+              <i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+    </p>
+  </div>
+  <hr>
+  <button class="btn btn-primary pull-left" type="submit">Подтвердить</button>
+</form>

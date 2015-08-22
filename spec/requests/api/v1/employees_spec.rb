@@ -114,7 +114,7 @@ describe "Employees API" do
       @employee = Employee.find(@employee.id)
 
       expect(@employee.desired_salary).to eq attributes[:desired_salary]
-      expect(@employee.skills.length).to  eq 4
+      expect(@employee.skills.length).to  eq 2
     end
 
     it 'show errors if attributes is invalid' do

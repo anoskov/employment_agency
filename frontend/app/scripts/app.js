@@ -18,7 +18,6 @@ angular
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       var extractedData;
       extractedData = data.result;
-      extractedData.data = response.data.result;
       return extractedData;
     });
   });

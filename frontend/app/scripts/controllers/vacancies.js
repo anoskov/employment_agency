@@ -38,7 +38,8 @@ angular.module('employmentAgencyApp')
         vacancy.skills_attributes = vacancy.skills_attributes.concat(vacancy.new_skills);
         vacancy.skills = vacancy.skills_attributes;
         baseVacancies.post(vacancy).then(function(response) {
-          var result = response.data;
+          var result = response;
+          console.log(result);
           vacancy.id = result.id;
           result.type = "success";
           $scope.alerts.push(result);
@@ -53,7 +54,7 @@ angular.module('employmentAgencyApp')
 
     $scope.deleteVacancy = function (id, index) {
       Restangular.one("vacancies", id).remove().then(function(response) {
-        var alert = response.data;
+        var alert = response;
         alert.type = "success";
         $scope.alerts.push(alert);
         $scope.allVacancies.splice(index, 1);
@@ -67,28 +68,7 @@ angular.module('employmentAgencyApp')
     $scope.toggleAnimation = function () {
       $scope.animationsEnabled = !$scope.animationsEnabled;
     };
-
-    $scope.exp_date_opened = false;
-
-    $scope.today = function() {
-      $scope.dt = new Date();
-    };
-    $scope.today();
-
-    $scope.dateOptions = {
-      formatYear: 'yyyy',
-      startingDay: 1
-    };
-
-    $scope.open = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-    };
-
-    $scope.clear = function () {
-      $scope.dt = null;
-    };
-
+    
   })
   .controller('ModalInstanceCtrl', function (Restangular, $scope, $modalInstance, vacancy) {
 

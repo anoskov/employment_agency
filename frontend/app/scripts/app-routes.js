@@ -13,6 +13,11 @@ angular.module('employmentAgencyApp')
         controller: 'VacanciesCtrl',
         controllerAs: 'vacancies'
       })
+      .when('/vacancies/:vacancyId', {
+        templateUrl: 'views/vacancy.html',
+        controller: 'VacancyCtrl',
+        controllerAs: 'vacancy'
+      })
       .when('/employees', {
         templateUrl: 'views/employees.html',
         controller: 'EmployeesCtrl',
