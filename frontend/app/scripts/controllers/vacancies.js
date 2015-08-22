@@ -68,7 +68,7 @@ angular.module('employmentAgencyApp')
     $scope.toggleAnimation = function () {
       $scope.animationsEnabled = !$scope.animationsEnabled;
     };
-    
+
   })
   .controller('ModalInstanceCtrl', function (Restangular, $scope, $modalInstance, vacancy) {
 

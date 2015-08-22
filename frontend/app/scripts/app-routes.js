@@ -13,9 +13,9 @@ angular.module('employmentAgencyApp')
         controller: 'VacanciesCtrl',
         controllerAs: 'vacancies'
       })
-      .when('/vacancies/:vacancyId', {
-        templateUrl: 'views/vacancy.html',
-        controller: 'VacancyCtrl',
+      .when('/vacancies/:vacancyId/edit', {
+        templateUrl: 'views/edit_vacancy.html',
+        controller: 'EditVacancyCtrl',
         controllerAs: 'vacancy'
       })
       .when('/employees', {
