@@ -20,7 +20,9 @@ gem 'figaro'
 gem 'phony_rails'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+
+gem 'foreman'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
