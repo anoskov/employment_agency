@@ -28,6 +28,16 @@ angular.module('employmentAgencyApp')
         controller: 'EmployeesCtrl',
         controllerAs: 'employees'
       })
+      .when('/employees/:employeeId', {
+        templateUrl: 'views/show_employee.html',
+        controller: 'ShowEmployeeCtrl',
+        controllerAs: 'showEmployee'
+      })
+      .when('/employees/:employeeId/edit', {
+        templateUrl: 'views/edit_employee.html',
+        controller: 'EditEmployeeCtrl',
+        controllerAs: 'editEmployee'
+      })
       .otherwise({
         redirectTo: '/'
       });

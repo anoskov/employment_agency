@@ -1,0 +1,46 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <p>{{alert.msg}}</p>
+  <span ng-repeat="(field, error) in alert.errors">
+    <p>{{field}} : {{error}}</p>
+  </span>
+</alert>
+<form name="editEmployeeForm" role="form" ng-submit="editEmployeeForm.$valid && updateEmployee()">
+  <div class="form-group">
+    <label>Фамилия</label>
+    <input type="text" name="title" class="form-control" ng-model="employee.lname" required>
+  </div>
+  <div class="form-group">
+    <label>Имя</label>
+    <input type="text" name="title" class="form-control" ng-model="employee.fname" required>
+  </div>
+  <div class="form-group">
+    <label>Отчество</label>
+    <input type="text" name="title" class="form-control" ng-model="employee.sname" required>
+  </div>
+  <div class="form-group">
+    <label>Навыки</label>
+    <tags-input ng-model="employee.skills" min-length="1" display-property="title" placeholder="Добавить навык">
+      <auto-complete source="loadSkills($query)" min-length="1"></auto-complete>
+    </tags-input>
+  </div>
+  <div class="form-group">
+    <label>Ожидаемая зарплата</label>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <input type="text" class="form-control" ng-model="employee.desired_salary" placeholder="От" required>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Контактная информация</label>
+    <input type="text" name="title" class="form-control" ng-model="employee.contact_info" required>
+  </div>
+  <div class="form-group">
+    <label>Статус</label>
+    <select class="form-control" ng-model="employee.job_status">
+      <option ng-repeat="status in jobStatuses" value="{{status}}">{{status}}</option>
+    </select>
+  </div>
+  <hr>
+  <button class="btn btn-primary pull-left" type="submit">Подтвердить</button>
+</form>

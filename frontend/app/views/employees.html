@@ -1,1 +1,92 @@
-<p>Сотрудники</p>
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+  <p>{{alert.msg}}</p>
+  <span ng-repeat="(field, error) in alert.errors">
+    <p>{{field}} : {{error}}</p>
+  </span>
+</alert>
+<br>
+<button class="btn btn-sm btn-success" ng-click="addEmployee()">Добавить сотрудника</button>
+<hr>
+<table st-table="allEmployees" class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Имя</th>
+    <th>Навыки</th>
+    <th>Ожидаемая зарплата</th>
+    <th>Контактные данные</th>
+    <th>Статус</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="employee in allEmployees">
+    <td>{{employee.lname}} {{employee.fname}} {{employee.sname}}</td>
+    <td>
+      <p ng-repeat="skill in employee.skills">{{skill.title}}</p>
+    </td>
+    <td>{{employee.desired_salary}}</td>
+    <td>{{employee.contact_info}}</td>
+    <td>{{employee.job_status}}</td>
+    <td><a type="button" class="btn btn-sm btn-info" ng-href="#/employees/{{employee.id}}">Просмотр</a></td>
+    <td><a type="button" class="btn btn-sm btn-primary" ng-href="#/employees/{{employee.id}}/edit">Редактировать</a></td>
+    <td><button type="button" class="btn btn-sm btn-danger" ng-click="deleteEmployee(employee.id, $index)">Удалить</button></td>
+  </tr>
+  </tbody>
+</table>
+<script type="text/ng-template" id="addEmployeeModal.html">
+  <div class="modal-header">
+    <h3 class="modal-title">Добавление сотрудника</h3>
+    <alert ng-repeat="alert in modalAlerts" type="{{alert.type}}" close="closeAlert($index)">
+      <p>{{alert.msg}}</p>
+      <span ng-repeat="(field, error) in alert.errors">
+        <p>{{field}} : {{error}}</p>
+      </span>
+    </alert>
+  </div>
+  <div class="modal-body">
+    <form name="addEmployeeForm" role="form" ng-submit="addEmployeeForm.$valid && submitEmployee()">
+      <div class="form-group">
+        <label>Фамилия</label>
+        <input type="text" name="title" class="form-control" ng-model="employee.lname" required>
+      </div>
+      <div class="form-group">
+        <label>Имя</label>
+        <input type="text" name="title" class="form-control" ng-model="employee.fname" required>
+      </div>
+      <div class="form-group">
+        <label>Отчество</label>
+        <input type="text" name="title" class="form-control" ng-model="employee.sname" required>
+      </div>
+      <div class="form-group">
+        <label>Навыки</label>
+        <tags-input ng-model="employee.skills_attributes" min-length="1" display-property="title" placeholder="Добавить навык">
+          <auto-complete source="loadSkills($query)" min-length="1"></auto-complete>
+        </tags-input>
+      </div>
+      <div class="form-group">
+        <label>Ожидаемая зарплата</label>
+        <div class="form-group row">
+          <div class="col-md-4">
+            <input type="text" class="form-control" ng-model="employee.desired_salary" placeholder="От" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Контактная информация</label>
+        <input type="text" name="title" class="form-control" ng-model="employee.contact_info" required>
+      </div>
+      <div class="form-group">
+        <label>Статус</label>
+        <select class="form-control" ng-model="employee.job_status">
+          <option ng-repeat="status in jobStatuses" value="{{status}}">{{status}}</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary pull-left" type="submit">Подтвердить</button>
+        <button class="btn btn-warning pull-right" type="button" ng-click="cancel()">Отмена</button>
+      </div>
+    </form>
+  </div>
+</script>
