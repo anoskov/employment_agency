@@ -10,8 +10,7 @@ angular.module('employmentAgencyApp')
 
     $scope.jobStatuses = [
       'Ищу работу',
-      'Не ищу работу',
-      'Открыт к предложениям'
+      'Не ищу работу'
     ];
 
     $scope.alerts = [];

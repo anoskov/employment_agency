@@ -1,6 +1,6 @@
 class Employee < ActiveRecord::Base
 
-  JOB_STATUSES = ['Ищу работу', 'Не ищу работу', 'Открыт к предложениям']
+  JOB_STATUSES = ['Ищу работу', 'Не ищу работу']
 
   scope :with_vacancies, -> (id) { includes(:ideal_vacancies, :potential_vacancies, :skills)
                                        .references(:ideal_vacancies, :potential_vacancies, :skills)
