@@ -22,7 +22,7 @@ module Api
       end
 
       def update
-        render status: @employee.update_attributes(employee_params) ? 201 : 422
+        render status: @employee.update(employee_params) ? 201 : 422
       end
 
       private
