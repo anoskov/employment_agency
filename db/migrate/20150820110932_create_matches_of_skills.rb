@@ -15,7 +15,7 @@ class CreateMatchesOfSkills < ActiveRecord::Migration
           FROM vacancies vacancy
           JOIN specified_skills vacancy_req_skill ON  vacancy_req_skill.owner_id = vacancy.id and vacancy_req_skill.owner_type = 'Vacancy'
           JOIN skills skill ON vacancy_req_skill.skill_id = skill.id
-          WHERE vacancy.expiration_date > vacancy_1.created_at::date
+          WHERE vacancy.expiration_date > vacancy.created_at::date
           GROUP BY vacancy.id
         )
 
