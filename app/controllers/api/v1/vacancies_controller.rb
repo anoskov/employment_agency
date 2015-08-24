@@ -24,7 +24,7 @@ module Api
 
       def update
         @vacancy.salary = params[:salary_begin].to_i..params[:salary_end].to_i if params[:salary_begin] && params[:salary_end]
-        render status: @vacancy.update_attributes(vacancy_params) ? 201 : 422
+        render status: @vacancy.update(vacancy_params) ? 201 : 422
       end
 
       private

@@ -116,7 +116,7 @@ describe "Vacancies API" do
       @vacancy = Vacancy.find(@vacancy.id)
 
       expect(@vacancy.salary.begin).to    eq attributes[:salary_begin]
-      expect(@vacancy.salary.end - 1).to      eq attributes[:salary_end]
+      expect(@vacancy.salary.end).to      eq attributes[:salary_end]
       expect(@vacancy.expiration_date).to eq attributes[:expiration_date]
       expect(@vacancy.skills.length).to  eq 2
     end
