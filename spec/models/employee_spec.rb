@@ -95,7 +95,7 @@ RSpec.describe Employee, :type => :model do
 
     it "job status inclusion in acceptable statuses" do
       expect(@employee).to validate_inclusion_of(:job_status)
-                               .in_array(['Ищу работу', 'Не ищу работу', 'Открыт к предложениям'])
+                               .in_array(['Ищу работу', 'Не ищу работу'])
     end
 
     context 'custom validations' do
