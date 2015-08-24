@@ -18,17 +18,20 @@ angular.module('employmentAgencyApp')
       $scope.vacancy = response;
     });
 
-    var baseSkills = Restangular.all('skills');
-    baseSkills.getList().then(function(skills) {
-      $scope.skills = skills
-    });
+    $scope.loadSkills = function(query) {
+      return $http.get('/api/v1/skills?query=' + query, { cache: true}).then(function(response) {
+        var result = {};
+        result.data = response.data.result;
+        return result;
+      });
+    };
 
     $scope.updateVacancy = function () {
-      $scope.vacancy.skills_attributes = $scope.vacancy.skills.concat($scope.vacancy.selected_skills);
+      $scope.vacancy.skills_attributes = $scope.vacancy.skills;
       $scope.vacancy.put().then(function(response){
         var result = response;
         result.type = "success";
-        $scope.vacancy.skills = $scope.vacancy.skills_attributes;
+        //$scope.vacancy.skills = $scope.vacancy.skills_attributes;
         $scope.alerts.push(result);
       }, function(response){
         var result = response.data.result;

@@ -7,6 +7,7 @@ angular.module('employmentAgencyApp')
       'AngularJS',
       'Karma'
     ];
+;
 
     $scope.alerts = [];
 
@@ -35,14 +36,13 @@ angular.module('employmentAgencyApp')
       modalInstance.result.then(function (vacancy) {
         vacancy.expiration_date = $filter('date')(vacancy.expiration_date, "yyyy-MM-dd");
         vacancy.created_date = $filter('date')(new Date(), "yyyy-MM-dd");
-        vacancy.skills_attributes = vacancy.new_skills.concat(vacancy.selected_skills);
-        vacancy.skills = vacancy.skills_attributes;
         baseVacancies.post(vacancy).then(function(response) {
           var result = response;
           console.log(result);
           vacancy.id = result.id;
           result.type = "success";
           $scope.alerts.push(result);
+          vacancy.skills = vacancy.skills_attributes;
           $scope.allVacancies.push(vacancy);
         }, function(response) {
           var result = response.data.result;
@@ -70,13 +70,15 @@ angular.module('employmentAgencyApp')
     };
 
   })
-  .controller('ModalInstanceCtrl', function (Restangular, $scope, $modalInstance, vacancy) {
+  .controller('ModalInstanceCtrl', function (Restangular, $scope, $http, $modalInstance, vacancy) {
 
-
-    var baseSkills = Restangular.all('skills');
-    baseSkills.getList().then(function(skills) {
-      $scope.skills = skills
+    $scope.loadSkills = function(query) {
+      return $http.get('/api/v1/skills?query=' + query, { cache: true}).then(function(response) {
+        var result = {};
+        result.data = response.data.result;
+        return result;
       });
+    };
 
     $scope.vacancy = vacancy;
 

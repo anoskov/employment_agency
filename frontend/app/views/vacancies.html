@@ -60,13 +60,8 @@
       </div>
       <div class="form-group">
         <label>Необходимые навыки</label>
-        <p>Доступные навыки:</p>
-        <select  class="form-control" size="15" ng-model="vacancy.selected_skills"
-                 ng-options="skill.title for skill in skills" multiple required>
-        </select>
-      </div>
-      <div class="form-group">
-        <tags-input ng-model="vacancy.new_skills" min-length="1" display-property="title" placeholder="Добавить навык">
+        <tags-input ng-model="vacancy.skills_attributes" min-length="1" display-property="title" placeholder="Добавить навык">
+          <auto-complete source="loadSkills($query)" min-length="1"></auto-complete>
         </tags-input>
       </div>
       <div class="form-group">

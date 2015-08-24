@@ -3,7 +3,7 @@ module Api
     class SkillsController < BaseController
 
       def index
-        @skills = Skill.all
+        @skills = Skill.where("title LIKE '%#{params[:query]}%'")
       end
 
     end
