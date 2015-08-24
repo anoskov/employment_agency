@@ -11,7 +11,9 @@ describe "Employees API" do
     expect(json['result'].length).to eq(2)
 
     employee = json['result'][0]
-    expect(employee['name']).to eq @employee.name
+    expect(employee['fname']).to eq @employee.first_name
+    expect(employee['lname']).to eq @employee.last_name
+    expect(employee['sname']).to eq @employee.surname
     expect(employee['contact_info']).to eq @employee.contact_info
     expect(employee['job_status']).to eq @employee.job_status
     expect(employee['desired_salary']).to eq @employee.desired_salary
@@ -23,7 +25,9 @@ describe "Employees API" do
     expect(response).to be_success
 
     employee = json['result']
-    expect(employee['name']).to eq @employee.name
+    expect(employee['fname']).to eq @employee.first_name
+    expect(employee['lname']).to eq @employee.last_name
+    expect(employee['sname']).to eq @employee.surname
     expect(employee['contact_info']).to eq @employee.contact_info
     expect(employee['job_status']).to eq @employee.job_status
     expect(employee['desired_salary']).to eq @employee.desired_salary

@@ -1,5 +1,7 @@
 json.id             employee.id
-json.name           employee.name
+json.fname          employee.first_name
+json.lname          employee.last_name
+json.sname          employee.surname
 json.contact_info   employee.contact_info
 json.job_status     employee.job_status
 json.desired_salary employee.desired_salary
