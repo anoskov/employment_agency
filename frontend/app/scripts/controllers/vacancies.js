@@ -1,16 +1,14 @@
 'use strict';
 
 angular.module('employmentAgencyApp')
-  .controller('VacanciesCtrl', function ($scope, Restangular, $modal, $filter) {
+  .controller('VacanciesCtrl', function ($scope, Restangular, $modal) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-;
 
     $scope.alerts = [];
-
     $scope.closeAlert = function(index) {
       $scope.alerts.splice(index, 1);
     };
@@ -27,28 +25,15 @@ angular.module('employmentAgencyApp')
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'addVacancyModal.html',
-        controller: 'ModalInstanceCtrl',
+        controller: 'VacancyModalCtrl',
         resolve: {
           vacancy: {}
         }
       });
 
-      modalInstance.result.then(function (vacancy) {
-        vacancy.expiration_date = $filter('date')(vacancy.expiration_date, "yyyy-MM-dd");
-        vacancy.created_date = $filter('date')(new Date(), "yyyy-MM-dd");
-        baseVacancies.post(vacancy).then(function(response) {
-          var result = response;
-          console.log(result);
-          vacancy.id = result.id;
-          result.type = "success";
-          $scope.alerts.push(result);
-          vacancy.skills = vacancy.skills_attributes;
-          $scope.allVacancies.push(vacancy);
-        }, function(response) {
-          var result = response.data.result;
-          result.type = "danger";
-          $scope.alerts.push(result);
-        });
+      modalInstance.result.then(function (result) {
+        $scope.alerts.push(result.alert);
+        $scope.allVacancies.push(result.vacancy);
       });
     };
 
@@ -70,7 +55,12 @@ angular.module('employmentAgencyApp')
     };
 
   })
-  .controller('ModalInstanceCtrl', function (Restangular, $scope, $http, $modalInstance, vacancy) {
+  .controller('VacancyModalCtrl', function (Restangular, $scope, $filter, $http, $modalInstance, vacancy) {
+
+    $scope.modalAlerts = [];
+    $scope.closeAlert = function (index) {
+      $scope.modalAlerts.splice(index, 1);
+    };
 
     $scope.loadSkills = function(query) {
       return $http.get('/api/v1/skills?query=' + query, { cache: true}).then(function(response) {
@@ -83,7 +73,20 @@ angular.module('employmentAgencyApp')
     $scope.vacancy = vacancy;
 
     $scope.submitVacancy = function () {
-      $modalInstance.close($scope.vacancy);
+      $scope.vacancy.expiration_date = $filter('date')($scope.vacancy.expiration_date, "yyyy-MM-dd");
+      $scope.vacancy.created_date = $filter('date')(new Date(), "yyyy-MM-dd");
+      Restangular.all('vacancies').post($scope.vacancy).then(function(response) {
+        var result = response;
+        $scope.vacancy.id = result.id;
+        result.type = "success";
+        $scope.vacancy.skills = $scope.vacancy.skills_attributes;
+        var alert = {msg: result.msg, errors: result.errors, type: 'success'};
+        $modalInstance.close({vacancy: $scope.vacancy, alert: alert});
+      }, function(response) {
+        var result = response.data.result;
+        result.type = "danger";
+        $scope.modalAlerts.push(result);
+      });
     };
 
     $scope.cancel = function () {

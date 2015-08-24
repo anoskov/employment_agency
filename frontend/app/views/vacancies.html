@@ -40,12 +40,18 @@
 <script type="text/ng-template" id="addVacancyModal.html">
   <div class="modal-header">
     <h3 class="modal-title">Добавление вакансии</h3>
+    <alert ng-repeat="alert in modalAlerts" type="{{alert.type}}" close="closeAlert($index)">
+      <p>{{alert.msg}}</p>
+      <span ng-repeat="(field, error) in alert.errors">
+        <p>{{field}} : {{error}}</p>
+      </span>
+    </alert>
   </div>
   <div class="modal-body">
     <form name="addVacancyForm" role="form" ng-submit="addVacancyForm.$valid && submitVacancy()">
       <div class="form-group">
         <label>Название</label>
-        <input type="text" name="title" class="form-control" ng-model="vacancy.title" required>
+        <input type="text" name="title" class="form-control" ng-model="vacancy.title">
       </div>
       <div class="form-group">
         <label>Зарплата</label>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('employmentAgencyApp')
-  .controller('EditVacancyCtrl', function ($scope, $routeParams, Restangular) {
+  .controller('EditVacancyCtrl', function ($scope, $routeParams, $http, Restangular) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
